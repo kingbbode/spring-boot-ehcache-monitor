@@ -20,10 +20,7 @@
 
 ```
 repositories {
-    maven {
-        url  "https://dl.bintray.com/kingbbode/springboot" 
-    }
-    //jcenter()
+    jcenter()
 }
 
 dependencies {
