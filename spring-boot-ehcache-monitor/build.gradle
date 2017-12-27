@@ -1,0 +1,78 @@
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+
+configurations {
+    javadocDeps
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+javadoc {
+    classpath += configurations.javadocDeps
+    options.addStringOption("sourcepath", "")
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId 'spring-boot-ehcache-monitor'
+            version project.version
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+}
+
+bintray {
+    user = 'kingbbode'
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publications = ['MyPublication']
+    pkg {
+        repo = 'springboot'
+        name = 'spring-boot-ehcache-monitor'
+        version {
+            name = project.version
+        }
+    }
+}
+
+dependencies {
+    compile('com.vaadin:vaadin-spring-boot-starter')
+    compile('com.byteowls:vaadin-chartjs:1.0.0')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-cache')
+    compile('net.sf.ehcache:ehcache')
+    javadocDeps 'javax.portlet:portlet-api:2.0'
+    compileOnly("org.projectlombok:lombok")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.vaadin:vaadin-bom:8.1.0"
+    }
+}

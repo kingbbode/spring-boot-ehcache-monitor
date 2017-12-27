@@ -1,0 +1,22 @@
+allprojects{
+    buildscript {
+        ext {
+            springBootVersion = '1.5.9.RELEASE'
+        }
+        repositories {
+            mavenCentral()
+            jcenter()
+        }
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        }
+    }
+
+    group 'com.github.kingbbode'
+    version '1.0'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}

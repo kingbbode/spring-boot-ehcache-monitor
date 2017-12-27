@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
+         updateCheck="true"
+         monitoring="autodetect"
+         dynamicConfig="true">
+    <diskStore path="java.io.tmpdir" />
+    
+    <cache name="Cache1"
+           maxElementsInMemory="200"
+           eternal="false"
+           overflowToDisk="false"
+           transactionalMode="off"
+    >
+        <bootstrapCacheLoaderFactory
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+                properties="bootstrapAsynchronously=true,
+                       maximumChunkSizeBytes=5000000" />
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="Cache2"
+           maxElementsInMemory="300"
+           eternal="false"
+           overflowToDisk="false"
+           transactionalMode="off"
+           timeToLiveSeconds="3600"
+    >
+        <bootstrapCacheLoaderFactory
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+                properties="bootstrapAsynchronously=true,
+                       maximumChunkSizeBytes=5000000" />
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="Cache3"
+           maxElementsInMemory="1000"
+           eternal="false"
+           overflowToDisk="false"
+           transactionalMode="off"
+           timeToLiveSeconds="300"
+    >
+        <bootstrapCacheLoaderFactory
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+                properties="bootstrapAsynchronously=false,
+                       maximumChunkSizeBytes=5000000" />
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="Cache4"
+           maxElementsInMemory="1000"
+           eternal="false"
+           overflowToDisk="false"
+           transactionalMode="off"
+           timeToLiveSeconds="300"
+    >
+        <bootstrapCacheLoaderFactory
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+                properties="bootstrapAsynchronously=false,
+                       maximumChunkSizeBytes=5000000" />
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="Cache5"
+           maxElementsInMemory="1000"
+           eternal="false"
+           overflowToDisk="false"
+           transactionalMode="off"
+           timeToLiveSeconds="300"
+    >
+        <bootstrapCacheLoaderFactory
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+                properties="bootstrapAsynchronously=false,
+                       maximumChunkSizeBytes=5000000" />
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="Cache6"
+           maxElementsInMemory="1000"
+           eternal="false"
+           overflowToDisk="false"
+           transactionalMode="off"
+           timeToLiveSeconds="300"
+    >
+        <bootstrapCacheLoaderFactory
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+                properties="bootstrapAsynchronously=false,
+                       maximumChunkSizeBytes=5000000" />
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="Cache7"
+           maxElementsInMemory="1000"
+           eternal="false"
+           overflowToDisk="false"
+           transactionalMode="off"
+           timeToLiveSeconds="300"
+    >
+        <bootstrapCacheLoaderFactory
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+                properties="bootstrapAsynchronously=false,
+                       maximumChunkSizeBytes=5000000" />
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+    <cacheManagerPeerProviderFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+            properties="peerDiscovery=manual,
+                    rmiUrls=//127.0.0.1:1234/Cache1|//127.0.0.1:1234/Cache2|//127.0.0.1:1234/Cache3" />
+    <cacheManagerPeerListenerFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+            properties="port=12345, socketTimeoutMillis=120000" />
+<!--    <cacheManagerPeerProviderFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+            properties="peerDiscovery=manual,
+                    rmiUrls=//127.0.0.1:12345/Cache1|//127.0.0.1:12345/Cache2|//127.0.0.1:12345/Cache3" />
+    <cacheManagerPeerListenerFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+            properties="port=1234, socketTimeoutMillis=120000" />-->
+</ehcache>

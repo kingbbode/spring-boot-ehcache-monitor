@@ -1,0 +1,4 @@
+rootProject.name = 'spring-boot-ehcache-monitor-root'
+include 'spring-boot-ehcache-monitor'
+include 'spring-boot-ehcache-monitor-sample'
+
