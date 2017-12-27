@@ -43,6 +43,35 @@ publishing {
             version project.version
             artifact javadocJar
             artifact sourcesJar
+
+            pom.withXml {
+                def node = asNode()
+                node.children().last() + {
+                    resolveStrategy = Closure.DELEGATE_FIRST
+                    name 'Spring Boot Ehcache Monitor'
+                    description 'A collections of methods to work with Date objects.'
+                    url 'https://github.com/AntonioCappiello/date-utils'
+
+                    licenses {
+                        license {
+                            name 'The Apache Software License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'kingbbode'
+                            name 'YongGeun Kwon'
+                            email 'kingbbode@gmail.com'
+                        }
+                    }
+                    scm {
+                        connection 'https://github.com/kingbbode/spring-boot-ehcache-monitor.git'
+                        developerConnection 'https://github.com/kingbbode/spring-boot-ehcache-monitor.git'
+                        url 'https://github.com/kingbbode/spring-boot-ehcache-monitor'
+                    }
+                }
+            }
         }
     }
 }
