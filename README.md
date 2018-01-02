@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.kingbbode:spring-boot-ehcache-monitor:1.0.0'
+    compile 'com.github.kingbbode:spring-boot-ehcache-monitor:1.0'
 }
 
 
