@@ -118,6 +118,15 @@ public class CacheDetailComponent extends CustomComponent implements View {
         Grid<Element> grid = new Grid<>();
         grid.addColumn(Element::getObjectKey).setCaption("Name");
         grid.addColumn(Element::getObjectValue).setCaption("Value");
+        grid.addColumn(element -> {
+            Button button = new Button(VaadinIcons.PLUS_CIRCLE);
+            button.addClickListener(event -> {
+                //TODO : Type Parser.
+                ValueWindow valueWindow = new ValueWindow(element.getObjectValue().toString());
+                UI.getCurrent().addWindow(valueWindow);
+            });
+            return button;
+        }, new ComponentRenderer()).setCaption("Value");
         grid.addColumn(element -> DateTimeUtils.ofPattern(element.getCreationTime(), FORMATTER)).setCaption("Create Time");
         grid.addColumn(element -> DateTimeUtils.ofPattern(element.getLastAccessTime(), FORMATTER)).setCaption("Access Time");
         grid.addColumn(element -> DateTimeUtils.ofPattern(element.getLastUpdateTime(), FORMATTER)).setCaption("Update Time");
@@ -184,5 +193,15 @@ public class CacheDetailComponent extends CustomComponent implements View {
             return;
         }
         this.detailGrid.setItems(ehcache.getAll(getKeys(ehcache, value)).values());
+    }
+
+    private class ValueWindow extends Window {
+        public ValueWindow(String value) {
+            super("Value"); // Set window caption
+            center();
+            setContent(new TextArea("", value));
+            setWidth(500, Unit.PIXELS);
+            setHeight(100, Unit.PERCENTAGE);
+        }
     }
 }
