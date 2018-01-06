@@ -112,10 +112,10 @@
     <cacheManagerPeerProviderFactory
             class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
             properties="peerDiscovery=manual,
-                    rmiUrls=//127.0.0.1:1234/Cache1|//127.0.0.1:1234/Cache2|//127.0.0.1:1234/Cache3" />
-    <cacheManagerPeerListenerFactory
-            class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-            properties="port=12345, socketTimeoutMillis=120000" />
+                    rmiUrls=/ r/127.0.0.1:1234/Cache1|//127.0.0.1:1234/Cache2|//127.0.0.1:1234/Cache3" />
+    <!--<cacheManagerPeerListenerFactory-->
+            <!--class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"-->
+            <!--properties="port=12345, socketTimeoutMillis=120000" />-->
 <!--    <cacheManagerPeerProviderFactory
             class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
             properties="peerDiscovery=manual,
