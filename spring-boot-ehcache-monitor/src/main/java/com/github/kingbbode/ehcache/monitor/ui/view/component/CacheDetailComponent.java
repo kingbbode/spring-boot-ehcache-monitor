@@ -1,5 +1,7 @@
 package com.github.kingbbode.ehcache.monitor.ui.view.component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.kingbbode.ehcache.monitor.utils.DateTimeUtils;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
@@ -28,13 +30,15 @@ public class CacheDetailComponent extends CustomComponent implements View {
     private static final String SEARCH_DEFAULT = "";
 
     private final CacheManager cacheManager;
+    private final ObjectMapper objectMapper;
     private Cache ehcache;
     private Grid<Cache> infoGrid;
     private Grid<Element> detailGrid;
     private TextField searchTextField;
 
-    public CacheDetailComponent(CacheManager cacheManager) {
+    public CacheDetailComponent(CacheManager cacheManager, ObjectMapper objectMapper) {
         this.cacheManager = cacheManager;
+        this.objectMapper = objectMapper;
     }
 
     private void init(String name) {
@@ -117,7 +121,14 @@ public class CacheDetailComponent extends CustomComponent implements View {
     private Grid<Element> createDetailGrid() {
         Grid<Element> grid = new Grid<>();
         grid.addColumn(Element::getObjectKey).setCaption("Name");
-        grid.addColumn(Element::getObjectValue).setCaption("Value");
+        grid.addColumn(element -> {
+            Button button = new Button(VaadinIcons.PLUS_CIRCLE);
+            button.addClickListener(event -> {
+                ValueWindow valueWindow = new ValueWindow(writeAsString(element));
+                UI.getCurrent().addWindow(valueWindow);
+            });
+            return button;
+        }, new ComponentRenderer()).setCaption("Value");
         grid.addColumn(element -> DateTimeUtils.ofPattern(element.getCreationTime(), FORMATTER)).setCaption("Create Time");
         grid.addColumn(element -> DateTimeUtils.ofPattern(element.getLastAccessTime(), FORMATTER)).setCaption("Access Time");
         grid.addColumn(element -> DateTimeUtils.ofPattern(element.getLastUpdateTime(), FORMATTER)).setCaption("Update Time");
@@ -139,6 +150,14 @@ public class CacheDetailComponent extends CustomComponent implements View {
             grid.setHeightByRows(ehcacheSize > 15 ? 15 : ehcacheSize);
         }
         return grid;
+    }
+
+    private String writeAsString(Element element) {
+        try {
+            return objectMapper.writeValueAsString(element.getObjectValue());
+        } catch (JsonProcessingException e) {
+            return "[can't show - " + e.getMessage() + "]";
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -184,5 +203,17 @@ public class CacheDetailComponent extends CustomComponent implements View {
             return;
         }
         this.detailGrid.setItems(ehcache.getAll(getKeys(ehcache, value)).values());
+    }
+
+    private class ValueWindow extends Window {
+        ValueWindow(String value) {
+            super("Value"); // Set window caption
+            center();
+            TextArea textArea = new TextArea("", value);
+            textArea.setWidth(400, Unit.PIXELS);
+            textArea.setRows(10);
+            
+            setContent(textArea);
+        }
     }
 }

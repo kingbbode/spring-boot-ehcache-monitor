@@ -11,7 +11,8 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('com.github.kingbbode:spring-boot-ehcache-monitor:1.0')
+    compile project(":spring-boot-ehcache-monitor")
+    //compile('com.github.kingbbode:spring-boot-ehcache-monitor:1.0')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
