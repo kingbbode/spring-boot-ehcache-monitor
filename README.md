@@ -1,6 +1,6 @@
 # spring-boot-ehcache-monitor
 
-[ ![Download](https://api.bintray.com/packages/kingbbode/springboot/spring-boot-ehcache-monitor/images/download.svg?version=1.0) ](https://bintray.com/kingbbode/springboot/spring-boot-ehcache-monitor/1.0/link)
+[ ![Download](https://api.bintray.com/packages/kingbbode/springboot/spring-boot-ehcache-monitor/images/download.svg) ](https://bintray.com/kingbbode/springboot/spring-boot-ehcache-monitor/_latestVersion)
 
 ## SPEC
 
@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.kingbbode:spring-boot-ehcache-monitor:1.0'
+    compile 'com.github.kingbbode:spring-boot-ehcache-monitor:{version}'
 }
 
 
