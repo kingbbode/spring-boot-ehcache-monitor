@@ -49,7 +49,7 @@ publishing {
                 node.children().last() + {
                     resolveStrategy = Closure.DELEGATE_FIRST
                     name 'Spring Boot Ehcache Monitor'
-                    description 'A collections of methods to work with Date objects.'
+                    description 'Ehcache Monitoring Web for Srping Boot Application.'
                     url 'https://github.com/AntonioCappiello/date-utils'
 
                     licenses {
