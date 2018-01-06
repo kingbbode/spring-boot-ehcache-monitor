@@ -4,15 +4,9 @@ apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 
-repositories {
-    jcenter()
-}
-
-
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile project(":spring-boot-ehcache-monitor")
-    //compile('com.github.kingbbode:spring-boot-ehcache-monitor:1.0')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
