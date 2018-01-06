@@ -181,7 +181,7 @@ public class CacheDetailComponent extends CustomComponent implements View {
     private void searchAction() {
         String value = this.searchTextField.getValue();
         if (StringUtils.isEmpty(value)) {
-            return;
+            value = "";
         }
         this.detailGrid.setItems(ehcache.getAll(getKeys(ehcache, value)).values());
     }
