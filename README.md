@@ -89,7 +89,7 @@ dependencyManagement {
 
 ## Description
 
-- Ehcache 의 쉬운 모니터링 툴이 없어서 만듬.
+- Ehcache 의 쉬운 모니터링 툴이 없어서 만듦.
 - 전체적인 기능은 RMI 환경을 지원
     - 상세 조회, 삭제에 대한 기본적인 기능은 RMI 환경을 지원.
     - 통계 데이터는 단일 서버에 대한 데이터만 노출.
