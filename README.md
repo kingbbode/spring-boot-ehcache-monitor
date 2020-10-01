@@ -11,8 +11,8 @@
 
 ## ENVIRONMENT
 
-- JDK 1.8 이상
-- Spring Boot 개발 환경
+- JDK 1.8
+- Spring Boot 
 
 ## Setup
 
